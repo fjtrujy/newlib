@@ -243,6 +243,10 @@ case "${host_cpu}" in
   mep)
 	machine_dir=mep
 	;;
+  mips64r5900*)
+  	machine_dir=r5900
+	newlib_cflags="${newlib_cflags} -DMALLOC_ALIGNMENT=16"
+	;;
   mips*)
 	machine_dir=mips
 	;;
@@ -553,6 +557,9 @@ case "${host}" in
 	;;
   mips*-dec-*)
 	sys_dir=decstation
+	;;
+  mips*-ps2-*)
+  	sys_dir=ps2
 	;;
   mmix-knuth-mmixware)
 	sys_dir=mmixware

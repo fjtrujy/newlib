@@ -11966,6 +11966,8 @@ subdirs="$subdirs a29k"
  ;;
 	z8k) subdirs="$subdirs z8k"
  ;;
+	r5900) subdirs="$subdirs r5900"
+ ;;
   esac;
 fi
 
