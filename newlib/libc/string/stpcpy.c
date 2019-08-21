@@ -34,8 +34,16 @@ QUICKREF
 /*SUPPRESS 530*/
 
 /* Nonzero if either X or Y is not aligned on a "long" boundary.  */
+#ifdef __PTRDIFF_TYPE__
+#define UNALIGNED(X, Y) \
+  (((__PTRDIFF_TYPE__)X & (sizeof (long) - 1)) | \
+   ((__PTRDIFF_TYPE__)Y & (sizeof (long) - 1)))
+#endif
+
+#ifndef UNALIGNED
 #define UNALIGNED(X, Y) \
   (((long)X & (sizeof (long) - 1)) | ((long)Y & (sizeof (long) - 1)))
+#endif
 
 #if LONG_MAX == 2147483647L
 #define DETECTNULL(X) (((X) - 0x01010101) & ~(X) & 0x80808080)

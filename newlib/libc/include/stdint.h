@@ -338,7 +338,8 @@ typedef __uint_least64_t uint_least64_t;
 #define UINTMAX_MAX UINT64_MAX
 #endif
 
-/* This must match size_t in stddef.h, currently long unsigned int */
+/* This must match size_t in stddef.h, currently long unsigned int,
+   except for gcc-3.2.3 for the MIPS R5900 which uses unsigned int. */
 #ifdef __SIZE_MAX__
 #define SIZE_MAX (__SIZE_MAX__)
 #else

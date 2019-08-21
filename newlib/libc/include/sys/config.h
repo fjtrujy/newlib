@@ -134,7 +134,12 @@
 #endif
 
 #if defined(__mips__) && !defined(__rtems__)
+#ifndef _R5900
 #define __ATTRIBUTE_IMPURE_PTR__ __attribute__((__section__(".sdata")))
+#else
+#define __ATTRIBUTE_IMPURE_PTR__
+#endif
+#define _POINTER_INT int
 #endif
 
 #ifdef __xstormy16__

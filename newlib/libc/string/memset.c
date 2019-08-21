@@ -30,7 +30,15 @@ QUICKREF
 #include "local.h"
 
 #define LBLOCKSIZE (sizeof(long))
+
+#ifdef __PTRDIFF_TYPE__
+#define UNALIGNED(X)   ((__PTRDIFF_TYPE__)X & (LBLOCKSIZE - 1))
+#endif
+
+#ifndef UNALIGNED
 #define UNALIGNED(X)   ((long)X & (LBLOCKSIZE - 1))
+#endif
+
 #define TOO_SMALL(LEN) ((LEN) < LBLOCKSIZE)
 
 void *

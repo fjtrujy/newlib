@@ -229,6 +229,14 @@
 #define __IEEE_BIG_ENDIAN
 #endif
 
+#ifdef _R5900
+#ifndef __mips_soft_float
+#define _FLT_LARGEST_EXPONENT_IS_NORMAL
+#define _FLOAT_ARG
+#define _FLT_NO_DENORMALS
+#endif
+#endif
+
 #ifdef __MMIX__
 #define __IEEE_BIG_ENDIAN
 #endif

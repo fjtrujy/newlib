@@ -33,8 +33,16 @@ QUICKREF
 #include <limits.h>
 
 /* Nonzero if either X or Y is not aligned on a "long" boundary.  */
+#ifdef __PTRDIFF_TYPE__
+#define UNALIGNED(X, Y) \
+  (((__PTRDIFF_TYPE__)X & (sizeof (long) - 1)) | \
+   ((__PTRDIFF_TYPE__)Y & (sizeof (long) - 1)))
+#endif
+
+#ifndef UNALIGNED
 #define UNALIGNED(X, Y) \
   (((long)X & (sizeof (long) - 1)) | ((long)Y & (sizeof (long) - 1)))
+#endif
 
 /* DETECTNULL returns nonzero if (long)X contains a NULL byte. */
 #if LONG_MAX == 2147483647L

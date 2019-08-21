@@ -31,7 +31,14 @@ QUICKREF
 #include <limits.h>
 
 #define LBLOCKSIZE   (sizeof (long))
+
+#ifdef __PTRDIFF_TYPE__
+#define UNALIGNED(X) ((__PTRDIFF_TYPE__)X & (LBLOCKSIZE - 1))
+#endif
+
+#ifndef UNALIGNED
 #define UNALIGNED(X) ((long)X & (LBLOCKSIZE - 1))
+#endif
 
 #if LONG_MAX == 2147483647L
 #define DETECTNULL(X) (((X) - 0x01010101) & ~(X) & 0x80808080)

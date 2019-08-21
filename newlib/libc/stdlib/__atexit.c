@@ -38,8 +38,9 @@
 #include <sys/lock.h>
 #include "atexit.h"
 
-/* Make this a weak reference to avoid pulling in malloc.  */
-void * malloc(size_t) _ATTRIBUTE((__weak__));
+#ifdef _REENT_SMALL
+#include "on_exit_args.h"
+#endif
 
 #ifdef _LITE_EXIT
 /* As __call_exitprocs is weak reference in lite exit, make a
@@ -80,9 +81,7 @@ __register_exitproc (int type,
     {
       _GLOBAL_ATEXIT = p = _GLOBAL_ATEXIT0;
 #ifdef _REENT_SMALL
-      extern struct _on_exit_args * const __on_exit_args _ATTRIBUTE ((weak));
-      if (&__on_exit_args != NULL)
-	p->_on_exit_args_ptr = __on_exit_args;
+      p->_on_exit_args_ptr = __on_exit_args;
 #endif	/* def _REENT_SMALL */
     }
   if (p->_ind >= _ATEXIT_SIZE)
@@ -93,16 +92,6 @@ __register_exitproc (int type,
 #endif
       return -1;
 #else
-      /* Don't dynamically allocate the atexit array if malloc is not
-	 available.  */
-      if (!malloc)
-	{
-#ifndef __SINGLE_THREAD__
-	  __lock_release_recursive(__atexit_recursive_mutex);
-#endif
-	  return -1;
-	}
-
       p = (struct _atexit *) malloc (sizeof *p);
       if (p == NULL)
 	{
@@ -135,8 +124,7 @@ __register_exitproc (int type,
 #endif
 	  return -1;
 #else
-	  if (malloc)
-	    args = malloc (sizeof * p->_on_exit_args_ptr);
+	  args = malloc (sizeof * p->_on_exit_args_ptr);
 
 	  if (args == NULL)
 	    {

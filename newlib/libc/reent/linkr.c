@@ -16,7 +16,7 @@
 
 #ifdef REENTRANT_SYSCALLS_PROVIDED
 
-int _dummy_link_syscalls = 1;
+int _dummy_linkr_syscall = 1;
 
 #else
 

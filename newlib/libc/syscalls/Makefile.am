@@ -12,10 +12,12 @@ GENERAL_SOURCES = \
 	sysgettod.c	\
 	sysisatty.c	\
 	syskill.c	\
+	sysmkdir.c	\
 	syslink.c	\
 	syslseek.c	\
 	sysopen.c	\
 	sysread.c	\
+	sysrmdir.c	\
 	syssbrk.c	\
 	sysstat.c	\
 	systimes.c	\

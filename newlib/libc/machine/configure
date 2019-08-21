@@ -824,6 +824,7 @@ necv70
 nios2
 or1k
 powerpc
+r5900
 rl78
 rx
 sh
@@ -11911,6 +11912,8 @@ subdirs="$subdirs a29k"
 	or1k) subdirs="$subdirs or1k"
  ;;
 	powerpc) subdirs="$subdirs powerpc"
+ ;;
+	r5900) subdirs="$subdirs r5900"
  ;;
 	rl78) subdirs="$subdirs rl78"
  ;;

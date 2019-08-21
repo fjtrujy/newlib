@@ -129,16 +129,23 @@ swapfunc (char *a,
 #define	CMP(t, x, y) (cmp((x), (y)))
 #endif
 
+#if !defined(I_AM_QSORT_R) && !defined(I_AM_GNU_QSORT_R)
 static inline char *
 med3 (char *a,
 	char *b,
 	char *c,
 	cmp_t *cmp,
 	void *thunk
-#if !defined(I_AM_QSORT_R) && !defined(I_AM_GNU_QSORT_R)
-__unused
+__unused)
+#else
+static inline char *
+med3 (char *a,
+	char *b,
+	char *c,
+	cmp_t *cmp,
+	void *thunk
+__unused)
 #endif
-)
 {
 	return CMP(thunk, a, b) < 0 ?
 	       (CMP(thunk, b, c) < 0 ? b : (CMP(thunk, a, c) < 0 ? c : a ))

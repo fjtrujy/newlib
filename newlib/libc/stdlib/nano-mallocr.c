@@ -105,12 +105,26 @@
 #define sbrk_start __malloc_sbrk_start
 #define current_mallinfo __malloc_current_mallinfo
 
+/* This should be portable for most targets that have __PTRDIFF_TYPE__. */
+#ifdef __PTRDIFF_TYPE__
+#define int (unsigned int)
+#define long (unsigned long)
 #define ALIGN_TO(size, align) \
-    (((size) + (align) -1L) & ~((align) -1L))
+    ((((__PTRDIFF_TYPE__)(size)) + \
+      ((__PTRDIFF_TYPE__)(align)) -1) & ~(((__PTRDIFF_TYPE__)(align)) -1))
+#undef int
+#undef long
+#endif
+
+#ifndef ALIGN_TO
+#define ALIGN_TO(size, align) \
+    ((((unsigned long)(size)) + \
+      ((unsigned long)(align)) -1) & ~(((unsigned long)(align)) -1))
+#endif
 
 /* Alignment of allocated block */
-#define MALLOC_ALIGN (8U)
-#define CHUNK_ALIGN (sizeof(void*))
+#define MALLOC_ALIGN (16U)
+#define CHUNK_ALIGN (16)
 #define MALLOC_PADDING ((MAX(MALLOC_ALIGN, CHUNK_ALIGN)) - CHUNK_ALIGN)
 
 /* as well as the minimal allocation size
@@ -228,7 +242,7 @@ static void* sbrk_aligned(RARG malloc_size_t s)
     if (p == (void *)-1)
         return p;
 
-    align_p = (char*)ALIGN_TO((unsigned long)p, CHUNK_ALIGN);
+    align_p = (char*)ALIGN_TO(p, CHUNK_ALIGN);
     if (align_p != p)
     {
         /* p is not aligned, ask for a few more bytes so that we have s
@@ -319,7 +333,7 @@ void * nano_malloc(RARG malloc_size_t s)
 
     ptr = (char *)r + CHUNK_OFFSET;
 
-    align_ptr = (char *)ALIGN_TO((unsigned long)ptr, MALLOC_ALIGN);
+    align_ptr = (char *)ALIGN_TO(ptr, MALLOC_ALIGN);
     offset = align_ptr - ptr;
 
     if (offset)
@@ -337,7 +351,7 @@ void * nano_malloc(RARG malloc_size_t s)
            Note that the size of the padding must be at least CHUNK_OFFSET.
 
            The rest of the padding is not initialized.  */
-        *(long *)((char *)r + offset) = -offset;
+        *(ptrdiff_t *)((char *)r + offset) = -offset;
     }
 
     assert(align_ptr + size <= (char *)r + alloc_size);
@@ -589,9 +603,7 @@ void * nano_memalign(RARG size_t align, size_t s)
     if (allocated == NULL) return NULL;
 
     chunk_p = get_chunk_from_ptr(allocated);
-    aligned_p = (char *)ALIGN_TO(
-                  (unsigned long)((char *)chunk_p + CHUNK_OFFSET),
-                  (unsigned long)align);
+    aligned_p = (char *)ALIGN_TO(((char *)chunk_p + CHUNK_OFFSET),align);
     offset = aligned_p - ((char *)chunk_p + CHUNK_OFFSET);
 
     if (offset)

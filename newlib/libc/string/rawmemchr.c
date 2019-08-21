@@ -33,7 +33,13 @@ QUICKREF
 #include <limits.h>
 
 /* Nonzero if X is not aligned on a "long" boundary.  */
+#ifdef __PTRDIFF_TYPE__
+#define UNALIGNED(X) ((__PTRDIFF_TYPE__)X & (sizeof (long) - 1))
+#endif
+
+#ifndef UNALIGNED
 #define UNALIGNED(X) ((long)X & (sizeof (long) - 1))
+#endif
 
 /* How many bytes are loaded each iteration of the word copy loop.  */
 #define LBLOCKSIZE (sizeof (long))

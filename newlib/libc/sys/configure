@@ -798,6 +798,7 @@ mmixware
 netware
 or1k
 phoenix
+r5900
 rdos
 rtems
 sh
@@ -11830,6 +11831,8 @@ subdirs="$subdirs a29khif"
 	or1k) subdirs="$subdirs or1k"
  ;;
 	phoenix) subdirs="$subdirs phoenix"
+ ;;
+	r5900) subdirs="$subdirs r5900"
  ;;
 	rdos) subdirs="$subdirs rdos"
  ;;

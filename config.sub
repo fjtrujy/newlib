@@ -328,6 +328,9 @@ case $basic_machine in
 	c6x)
 		basic_machine=tic6x-unknown
 		;;
+	ee)
+		basic_machine=mips64r5900-unknown
+		;;
 	leon|leon[3-9])
 		basic_machine=sparc-$basic_machine
 		;;

@@ -63,6 +63,7 @@ if test -n "${machine_dir}"; then
 	nios2) AC_CONFIG_SUBDIRS(nios2) ;;
 	or1k) AC_CONFIG_SUBDIRS(or1k) ;;
 	powerpc) AC_CONFIG_SUBDIRS(powerpc) ;;
+	r5900) AC_CONFIG_SUBDIRS(r5900) ;;
 	rl78) AC_CONFIG_SUBDIRS(rl78) ;;
 	rx) AC_CONFIG_SUBDIRS(rx) ;;
 	sh) AC_CONFIG_SUBDIRS(sh) ;;

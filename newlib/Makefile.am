@@ -112,7 +112,8 @@ MATHOBJS_IN_LIBC = \
 	$(lpfx)sf_modf.$(oext) $(lpfx)s_scalbn.$(oext) \
 	$(lpfx)sf_scalbn.$(oext) \
 	$(lpfx)s_finite.$(oext) $(lpfx)sf_finite.$(oext) \
-	$(lpfx)s_copysign.$(oext) $(lpfx)sf_copysign.$(oext)
+	$(lpfx)s_copysign.$(oext) $(lpfx)sf_copysign.$(oext) \
+	$(lpfx)s_signbit.$(oext)
 
 LIBC_OBJECTLISTS = \
 	$(POSIX_OBJECTLIST) \

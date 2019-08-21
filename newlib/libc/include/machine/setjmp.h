@@ -120,7 +120,7 @@ _BEGIN_STD_C
 #define _JBLEN 10
 #endif
 
-#ifdef __mips__
+#ifdef __mips__ && !defined(_R5900)
 # if defined(__mips64)
 #  define _JBTYPE long long
 # endif
@@ -131,8 +131,9 @@ _BEGIN_STD_C
 # endif
 #endif
 
-#ifdef __m88000__
-#define _JBLEN 21
+#ifdef __mips__ && defined(_R5900)
+# define _JBTYPE unsigned int __attribute__((mode(TI)))
+# define _JBLEN 14
 #endif
 
 #ifdef __H8300__

@@ -31,8 +31,17 @@ QUICKREF
 #include <limits.h>
 
 /* Nonzero if X is aligned on a "long" boundary.  */
+#ifdef __PTRDIFF_TYPE__
+#define ALIGNED(X) \
+  (((__PTRDIFF_TYPE__)X & (sizeof (long) - 1)) == 0)
+#endif
+
+#ifndef ALIGNED
 #define ALIGNED(X) \
   (((long)X & (sizeof (long) - 1)) == 0)
+#endif
+
+
 
 #if LONG_MAX == 2147483647L
 #define DETECTNULL(X) (((X) - 0x01010101) & ~(X) & 0x80808080)

@@ -33,8 +33,16 @@ QUICKREF
 
 
 /* Nonzero if either X or Y is not aligned on a "long" boundary.  */
+#ifdef __PTRDIFF_TYPE__
+#define UNALIGNED(X, Y) \
+  (((__PTRDIFF_TYPE__)X & (sizeof (long) - 1)) | \
+   ((__PTRDIFF_TYPE__)Y & (sizeof (long) - 1)))
+#endif
+
+#ifndef UNALIGNED
 #define UNALIGNED(X, Y) \
   (((long)X & (sizeof (long) - 1)) | ((long)Y & (sizeof (long) - 1)))
+#endif
 
 /* How many bytes are copied each iteration of the word copy loop.  */
 #define LBLOCKSIZE (sizeof (long))
