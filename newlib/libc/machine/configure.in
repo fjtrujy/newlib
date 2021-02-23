@@ -67,6 +67,7 @@ if test -n "${machine_dir}"; then
 	or1k) AC_CONFIG_SUBDIRS(or1k) ;;
 	powerpc) AC_CONFIG_SUBDIRS(powerpc) ;;
 	pru) AC_CONFIG_SUBDIRS(pru) ;;
+	r5900) AC_CONFIG_SUBDIRS(r5900) ;;
 	rl78) AC_CONFIG_SUBDIRS(rl78) ;;
 	rx) AC_CONFIG_SUBDIRS(rx) ;;
 	sh) AC_CONFIG_SUBDIRS(sh) ;;
@@ -82,7 +83,6 @@ if test -n "${machine_dir}"; then
 	xc16x) AC_CONFIG_SUBDIRS(xc16x) ;;
 	xstormy16) AC_CONFIG_SUBDIRS(xstormy16) ;;
 	z8k) AC_CONFIG_SUBDIRS(z8k) ;;
-	r5900) AC_CONFIG_SUBDIRS(r5900) ;;
   esac;
 fi
 
