@@ -25,7 +25,6 @@ if test -n "${machine_dir}"; then
   case ${machine_dir} in
 	a29k) AC_CONFIG_SUBDIRS(a29k) ;;
 	aarch64) AC_CONFIG_SUBDIRS(aarch64) ;;
-	allegrex) AC_CONFIG_SUBDIRS(allegrex) ;;
 	amdgcn) AC_CONFIG_SUBDIRS(amdgcn) ;;
 	arc) AC_CONFIG_SUBDIRS(arc) ;;
 	arm) AC_CONFIG_SUBDIRS(arm) ;;

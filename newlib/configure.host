@@ -250,7 +250,7 @@ case "${host_cpu}" in
 	machine_dir=mep
 	;;
   mipsallegrex*psp*)
-	machine_dir=allegrex
+	machine_dir=mips
 	newlib_cflags="${newlib_cflags} -G0 -DMALLOC_ALIGNMENT=16"
 	;;
   mips*)
