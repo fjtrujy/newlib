@@ -1,4 +1,4 @@
-dnl This is the newlib/libc/sys/psp configure.in file.
+dnl This is the newlib/libc/sys/ps2 configure.in file.
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
