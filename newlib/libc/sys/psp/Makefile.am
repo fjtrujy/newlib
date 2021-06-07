@@ -8,11 +8,17 @@ AM_CCASFLAGS = $(INCLUDES)
 
 noinst_LIBRARIES = lib.a
 
-lib_a_SOURCES = crt0.c
+MLOCK_MULT_OBJS = _lock_unlock.o
+
+lib_a_SOURCES = mlock.c
+lib_a_LIBADD = $(MLOCK_MULT_OBJS)
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 
-all-local: crt0.o
+all: crt0.o
+
+$(MLOCK_MULT_OBJS): mlock.c
+	$(AM_V_CC)$(COMPILE) -DF_$* $< -c -o $@
 
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
 CONFIG_STATUS_DEPENDENCIES = $(newlib_basedir)/configure.host
